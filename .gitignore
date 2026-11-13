@@ -1,0 +1,25 @@
+# Build artifacts
+*.deb
+*.dsc
+*.changes
+*.buildinfo
+*.tar.xz
+*.orig.tar.*
+!debian/*.install
+
+# Repository output
+repos/
+pool/
+dists/
+
+# Editor and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Secrets and local config
+.env
+.secrets/
+*.key
+*.pem
