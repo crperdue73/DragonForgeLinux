@@ -7,7 +7,7 @@ base to standardize on and a set of role builds to vary from, so that a networki
 cybersecurity module, and a server module all run on the same platform instead of three lab
 images nobody maintains.
 
-Standardize the base. Vary the build.
+**Standardize the base. Vary the build.**
 
 ## Why this exists
 
@@ -17,7 +17,7 @@ learning a different desktop, instructors spend the first week debugging images 
 teaching, and nobody can answer the question "what are we actually running."
 
 DragonForge is one answer to that question. A shared base, role-based metapackages on top of it,
-and a repository you control.
+and a repository the course controls.
 
 ## Roles
 
@@ -32,7 +32,9 @@ Role metapackages select a workload without replacing the base:
 | Networking | `dragonforge-network` | Packet analysis, configuration, and troubleshooting tools |
 | Programming | `dragonforge-programming` | Toolchains and editor support for programming coursework |
 
-The base package (`dragonforge-base`) is the floor. Everything else layers onto it.
+The base package (`dragonforge-base`) is the floor. Everything else layers onto it. Roles depend
+on the base and never on each other, which is what allows a course to remove a role without
+damaging the system underneath it.
 
 ## Repository layout
 
@@ -46,13 +48,15 @@ unstable/
 
 - `testing` carries what has been built and verified.
 - `unstable` carries what is still moving.
-- A client sources line pointing at a DragonForge repository expects `trixie` as the suite.
+- Only the `trixie` suite is currently published.
 
-## Install
+## Documentation
 
-Installation scripts and the current repository URL live with the build infrastructure, not in
-this repository. This repository holds the project, its documentation, and the record of what
-was built.
+- [Architecture](docs/ARCHITECTURE.md) — the two-layer model, the repository, guards, and why
+  repair order matters
+- [Verifying a repository](docs/VERIFYING-A-REPO.md) — eight checks that separate a healthy index
+  from a healthy repository
+- [Contributing](CONTRIBUTING.md)
 
 ## Status
 
@@ -69,13 +73,6 @@ describe the environment you would be running it in.
 - Debian 13 (Trixie) as the base
 - amd64 for the current builds
 - Network access to a DragonForge repository during provisioning
-
-## Contributing
-
-Issues are the front door. Describe the environment, what you expected, and what happened. For
-package problems, include the package name, version, and the exact command that failed.
-
-Build and repository changes are coordinated through issues before code.
 
 ## License
 
